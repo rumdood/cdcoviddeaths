@@ -6,8 +6,9 @@ import pandas as pd
 maxDays = 375
 
 startpoint = datetime.date.today() - datetime.timedelta(days=maxDays) 
+token = os.getenv('CDC_APP_TOKEN')
 
-client = Socrata('data.cdc.gov', app_token=os.getenv('CDC_APP_TOKEN'))
+client = Socrata('data.cdc.gov', app_token=token)
 data = client.get('9mfq-cb36', 
     limit=60000, 
     where=f"submission_date > '{startpoint}T00:00:00.000'", 
